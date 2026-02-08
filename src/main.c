@@ -22,6 +22,7 @@ int main(void)
     engine_register_hooks(&engine);
     // draw_test(&engine);
     // mlx_put_image_to_window(engine.mlx, engine.win, engine.frame.img, 0, 0);
+    // dev
     mlx_loop(engine.mlx);
     return 0;
 }
