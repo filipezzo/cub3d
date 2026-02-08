@@ -18,6 +18,8 @@ BIN_DIR			= bin
 LIBS_DIR			= libs
 INCLUDE_DIR = include
 ENGINE_DIR = $(SRC_DIR)/engine
+MOCK_DIR = $(SRC_DIR)/mock
+RENDER_DIR = $(SRC_DIR)/render
 MLX_DIR = libs/mlx
 
 
@@ -27,10 +29,14 @@ LIBFT = $(LIBS_DIR)/libft/libft.a
 MLX_A = $(MLX_DIR)/libmlx.a
 
 SRC_FILES = main.c
-ENGINE_FILES = mock_world.c
+ENGINE_FILES = engine_init.c engine_tick.c engine_shutdown.c engine_register_hooks.c engine_events.c
+MOCK_FILES = mock_world.c
+RENDER_FILES = pixel.c draw.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))	\
-		$(addprefix $(ENGINE_DIR)/, $(ENGINE_FILES))
+		$(addprefix $(ENGINE_DIR)/, $(ENGINE_FILES)) 	\
+		$(addprefix $(MOCK_DIR)/, $(MOCK_FILES))	\
+		$(addprefix $(RENDER_DIR)/, $(RENDER_FILES))	\
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 HEADER = $(INCLUDE_DIR)/cub3d.h
