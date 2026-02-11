@@ -1,7 +1,7 @@
 # Cub3D 🕹️
 *Wednesday, 5 february 2026 - São Paulo, Brazil*
 
-*This project was created as part of the [42](https://www.42sp.org.br/) curriculum by [mhidani](mhidani@student.42.fr) and [fsousa](fsousa@student.42.fr).*
+*This project was created as part of the [42](https://www.42sp.org.br/) curriculum by `mhidani` and `fsousa`.*
 
 ## Description 📃
 
