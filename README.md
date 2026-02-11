@@ -12,7 +12,7 @@ management, input, textures, and basic game logic without relying on high-level
 graphics libraries. The main goal is to strengthen low-level programming 
 skills, memory management, and understanding of computer graphics fundamentals.
 
-cub3D is also a team-based project, requiring collaboration, task distribution, 
+Cub3D is also a team-based project, requiring collaboration, task distribution, 
 and communication between partners, which makes it an excellent opportunity to 
 practice teamwork and software engineering practices in a real-world-like 
 environment.
