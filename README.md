@@ -18,5 +18,5 @@ practice teamwork and software engineering practices in a real-world-like
 environment.
 
 **Members**:
-	- Filipe Souza: fsouza | [linkedin](https://www.linkedin.com/in/filipezzo/)
-	- Mauricio Hidani: mhidani | [linkedin](https://www.linkedin.com/in/mauricio-hidani/)
+- Filipe Souza: fsouza | [linkedin](https://www.linkedin.com/in/filipezzo/)
+- Mauricio Hidani: mhidani | [linkedin](https://www.linkedin.com/in/mauricio-hidani/)
