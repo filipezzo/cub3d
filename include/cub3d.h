@@ -6,7 +6,7 @@
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 10:59:17 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/05 18:03:15 by fsousa           ###   ########.fr       */
+/*   Updated: 2026/02/12 15:48:52 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #include <stdint.h>
 
 #define KEY_ESC 65307
+#define KEY_ARROW_LEFT  65361
+#define KEY_ARROW_RIGHT 65363
 #define KEY_W 119
 #define KEY_A 97
 #define KEY_S 115
@@ -77,6 +79,23 @@ typedef struct s_engine
     t_bool running;
 } t_engine;
 
+typedef struct s_input
+{
+ t_bool w;
+ t_bool a;
+ t_bool s;
+ t_bool d;
+ t_bool left;
+ t_bool right;
+} t_input;
+
+typedef struct s_game
+{
+	t_engine eng;
+	t_world  world;
+	t_input  in;
+}	t_game;
+
 void world_fake(t_world *out);
 
 void put_pixel(t_data *img, int x, int y, uint32_t color);
@@ -84,7 +103,9 @@ void draw_test(t_engine *e);
 int engine_init(t_engine *e, int w, int h, const char *title);
 int engine_tick(void *param);
 void engine_shutdown(t_engine *e);
-void engine_register_hooks(t_engine *e);
+void engine_register_hooks(t_game *game);
 int on_key_press(int keycode, void *param);
+int on_key_release(int keycode, void *param);
 int on_destroy(void *param);
+
 #endif

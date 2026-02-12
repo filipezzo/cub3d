@@ -6,7 +6,7 @@
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 11:00:55 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/05 18:07:11 by fsousa           ###   ########.fr       */
+/*   Updated: 2026/02/12 15:53:53 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 int main(void)
 {
-    t_world world;
-    t_engine engine;
-    world_fake(&world);
-    printf("posicao do player: x: %f, y:%f\n", world.px, world.py);
-    engine_init(&engine, GAME_WIDTH, GAME_HEIGHT, "cub3d");
-    engine_register_hooks(&engine);
-    // draw_test(&engine);
-    // mlx_put_image_to_window(engine.mlx, engine.win, engine.frame.img, 0, 0);
-    // dev
-    mlx_loop(engine.mlx);
-    return 0;
+    t_game game;
+
+    ft_bzero(&game, sizeof(game));
+    world_fake(&game.world);
+   if (!engine_init(&game.eng, GAME_WIDTH, GAME_HEIGHT, "cub3d"))
+        return (1);
+    engine_register_hooks(&game);
+    printf("aloha -> %d",game.in.w);
+    mlx_loop(game.eng.mlx);
+    return (0);
 }

@@ -2,17 +2,17 @@
 
 int engine_tick(void *param)
 {
-    t_engine *e;
+     t_game *game;
 
-    e = (t_engine *)param;
-    if (!e)
+    game = (t_game *)param;
+    if (!game)
         return (0);
-    if (!e->running)
+    if (!game->eng.running)
     {
-        engine_shutdown(e);
+        engine_shutdown(&game->eng);
         exit(0);
     }
-    draw_test(e);
-    mlx_put_image_to_window(e->mlx, e->win, e->frame.img, 0, 0);
+    draw_test(&game->eng);
+    mlx_put_image_to_window(game->eng.mlx, game->eng.win, game->eng.frame.img, 0, 0);
     return (0);
 }
