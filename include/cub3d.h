@@ -6,7 +6,7 @@
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 10:59:17 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/12 15:48:52 by fsousa           ###   ########.fr       */
+/*   Updated: 2026/02/12 17:58:50 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "../libs/mlx/mlx.h"
+#include <math.h>
 #include <stdint.h>
 
 #define KEY_ESC 65307
@@ -33,6 +34,8 @@
 #define TEX_COUNT 4
 #define GAME_WIDTH 720
 #define GAME_HEIGHT 400
+#define MOVE 0.05;
+#define ROT 0.04;
 
 typedef struct s_world
 {
@@ -97,7 +100,6 @@ typedef struct s_game
 }	t_game;
 
 void world_fake(t_world *out);
-
 void put_pixel(t_data *img, int x, int y, uint32_t color);
 void draw_test(t_engine *e);
 int engine_init(t_engine *e, int w, int h, const char *title);
