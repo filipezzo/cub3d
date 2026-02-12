@@ -1,0 +1,12 @@
+NO ./path/north.xpm
+SO ./path/south.xpm
+WE ./path/west.xpm
+EA ./path/east.xpm
+
+F 220,100,0
+C 225,30,0
+
+111111
+100001
+10N001
+111111
