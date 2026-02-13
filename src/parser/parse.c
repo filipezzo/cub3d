@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 12:07:42 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/13 14:18:22 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/13 15:49:42 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,16 @@ void	parse(char *fpath, t_world *world)
 
 	if (!fpath || !*fpath)
 		perr_exit("No path the map file was provided", EXIT_FAILURE);
-	if (!isext(fpath, ".cub"))
-		perr_exit("The file extension provided is invalid", EXIT_FAILURE);
-	fd = open(fpath, O_RDONLY);
-	if (fd == -1)
-		perr_exit("Could not find the map file", EXIT_FAILURE);
+	if (!validate_fpath(fpath, ".cub", &fd))
+	{
+		safe_close_fd(fd);
+		exit(EXIT_FAILURE);
+	}
+	safe_close_fd(fd);
 	lines = read_input(fd);
 	// TODO: implement 👇
-	// TODO: parse_header(&world, input)
-	// TODO: parse_map(&world, input)
+	parse_header(&world, lines);
+	parse_map(&world, lines);
 	ft_destroy_dlist(lines);
 }
 
