@@ -6,7 +6,7 @@
 #    By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 10:52:32 by fsousa            #+#    #+#              #
-#    Updated: 2026/02/05 18:02:35 by fsousa           ###   ########.fr        #
+#    Updated: 2026/02/13 12:39:29 by fsousa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ INCLUDE_DIR = include
 ENGINE_DIR = $(SRC_DIR)/engine
 MOCK_DIR = $(SRC_DIR)/mock
 RENDER_DIR = $(SRC_DIR)/render
+PLAYER_DIR = $(SRC_DIR)/player
 MLX_DIR = libs/mlx
 
 
@@ -31,12 +32,14 @@ MLX_A = $(MLX_DIR)/libmlx.a
 SRC_FILES = main.c
 ENGINE_FILES = engine_init.c engine_tick.c engine_shutdown.c engine_register_hooks.c engine_events.c
 MOCK_FILES = mock_world.c
-RENDER_FILES = pixel.c draw.c
+RENDER_FILES = pixel.c draw.c minimap.c
+PLAYER_FILES = player_update.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))	\
 		$(addprefix $(ENGINE_DIR)/, $(ENGINE_FILES)) 	\
 		$(addprefix $(MOCK_DIR)/, $(MOCK_FILES))	\
 		$(addprefix $(RENDER_DIR)/, $(RENDER_FILES))	\
+		$(addprefix $(PLAYER_DIR)/, $(PLAYER_FILES))	\
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 HEADER = $(INCLUDE_DIR)/cub3d.h
