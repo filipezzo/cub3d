@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 10:59:17 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/12 12:04:22 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/13 15:58:07 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "../libs/mlx/mlx.h"
 # include <stdint.h>
 # include <fcntl.h>
+# include <unistd.h>
 
 # define KEY_ESC 65307
 # define KEY_W 119
@@ -92,8 +93,13 @@ void		engine_register_hooks(t_engine *e);
 int			on_key_press(int keycode, void *param);
 int			on_destroy(void *param);
 
-int			checkin(char *map);
-t_bool		is_valid_ext(char *file, char *ext);
 uint32_t	parse_rgb(const char *str);
+t_bool		load_texture(t_engine *engine, t_data *tex, char *path);
+t_bool		validate_fpath(char *fpath, char *ext, int *fd);
+t_bool		isext(char *file, char *ext);
+void		safe_close_fd(int fd);
+
+void		perr(char *msg);
+void		perr_exit(char *msg, int status_code);
 
 #endif
