@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 10:59:17 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/13 15:58:07 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/14 00:16:08 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,15 @@
 # define GAME_WIDTH 720
 # define GAME_HEIGHT 400
 
-typedef struct s_world	t_world;
-typedef struct s_data	t_data;
-typedef struct s_engine	t_engine;
+# define NORTH_TGT "NO "
+# define SOUTH_TGT "SO "
+# define WEST_TGT "WE "
+# define EAST_TGT "EA "
+
+typedef struct s_world		t_world;
+typedef struct s_data		t_data;
+typedef struct s_textures	t_textures;
+typedef struct s_engine		t_engine;
 
 typedef struct s_world
 {
@@ -59,6 +65,7 @@ typedef struct s_world
 	uint32_t	ceil_rgb;
 	// array de 4 strings para as texturas N/S/W/E
 	char		*tex_path[TEX_COUNT];
+	t_textures	texs;
 }	t_world; // MAPA + PLAYER + VISUALS.
 
 typedef struct s_data
@@ -71,6 +78,14 @@ typedef struct s_data
 	int			w;
 	int			h;
 }	t_data;
+
+typedef struct s_textures
+{
+	t_data		*n;
+	t_data		*s;
+	t_data		*w;
+	t_data		*e;
+}	t_textures;
 
 typedef struct s_engine
 {
