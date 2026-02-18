@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine_tick.c                                      :+:      :+:    :+:   */
+/*   render_frame.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/13 12:34:25 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/18 19:12:43 by fsousa           ###   ########.fr       */
+/*   Created: 2026/02/18 16:07:38 by fsousa            #+#    #+#             */
+/*   Updated: 2026/02/18 17:40:31 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	engine_tick(void *param)
+void	render_frame(t_game *g)
 {
-	t_game	*game;
-
-	game = (t_game *)param;
-	if (!game)
-		return (0);
-	if (!game->eng.running)
-	{
-		engine_shutdown(&game->eng);
-		exit(0);
-	}
-	player_update(game);
-	render_frame(game);
-	mlx_put_image_to_window(game->eng.mlx, game->eng.win, game->eng.frame.img,
-		0, 0);
-	return (0);
+	if (!g)
+		return ;
+	draw_floor_ceil(&g->eng, &g->world);
+	raycast_walls(g);
 }

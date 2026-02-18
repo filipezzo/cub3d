@@ -6,7 +6,7 @@
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 10:59:17 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/13 15:41:31 by fsousa           ###   ########.fr       */
+/*   Updated: 2026/02/18 19:47:12 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,33 +35,27 @@
 # define GAME_WIDTH 720
 # define GAME_HEIGHT 400
 # define TILE 8
-# define MOVE_SPEED 0.03
-# define ROT_SPEED 0.015
+# define MOVE_SPEED 0.013
+# define ROT_SPEED 0.0050
 # define COL_PAD 0.15
 
 typedef struct s_world
 {
-	// nosso mapa - LEMBRE-SE QUE O Y CRESCE PARA BAIXO
 	char		**grid;
-	// dimensoes do mapa (n col e n rows)
 	int			w;
 	int			h;
-	// posicao do player
 	double		px;
 	double		py;
-	// direçao (dir) - para onde o player olha (VETOR)
 	double		dir_x;
 	double		dir_y;
-	// vetor do plano da câmera (segredo pro FOV)
 	double		plane_x;
 	double		plane_y;
-	// cores do chao e teto
 	uint32_t	floor_rgb;
 	uint32_t	ceil_rgb;
-	// array de 4 strings para as texturas N/S/W/E
+	uint32_t	wall_rgb;
 	char		*tex_path[TEX_COUNT];
 
-} t_world; // MAPA + PLAYER + VISUALS.
+}				t_world;
 
 typedef struct s_data
 {
@@ -113,4 +107,10 @@ int				on_key_release(int keycode, void *param);
 int				on_destroy(void *param);
 void			player_update(t_game *game);
 void			render_minimap(t_game *game);
+void			ray_setup(t_game *g, int x, double r[7], int m[4]);
+void			raycast_walls(t_game *g);
+void			render_frame(t_game *g);
+void			draw_vline(t_data *img, int x, int y0, int y1, uint32_t color);
+void			draw_floor_ceil(t_engine *e, t_world *w);
+void			raycast_walls(t_game *g);
 #endif
