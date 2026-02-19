@@ -37,5 +37,7 @@ t_bool	load_texture(t_engine *engine, t_data *tex, char *path)
 		&tex->bits_per_pixel,
 		&tex->line_length,
 		&tex->endian);
+	if (!tex->addr)
+		return (perr_failed("Failed to get MLX texture address"));
 	return (TRUE);
 }
