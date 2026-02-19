@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 10:59:17 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/14 00:16:08 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/19 16:13:36 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,13 +110,21 @@ void		engine_register_hooks(t_engine *e);
 int			on_key_press(int keycode, void *param);
 int			on_destroy(void *param);
 
-uint32_t	parse_rgb(const char *str);
+void		parse(char *fpath, t_engine *engine, t_world *world);
+t_bnode		*get_start_map(t_dlist *lines);
+void		count_map_size(t_world *world, t_bnode *node);
+void		new_rawmap(t_world *world, t_bnode *node);
+void		set_player_pos(t_world *world, int x);
+void		set_player_dir(t_world *world, char tgt);
+t_bool		load_color(const char *str, uint32_t *color);
 t_bool		load_texture(t_engine *engine, t_data *tex, char *path);
-t_bool		validate_fpath(char *fpath, char *ext, int *fd);
-t_bool		isext(char *file, char *ext);
-void		safe_close_fd(int fd);
+int			validate_fpath(char *fpath, char *ext);
+void		set_vec2(double x, double y, double *tx, double *ty);
 
-void		perr(char *msg);
-void		perr_exit(char *msg, int status_code);
+void		safe_close_fd(int fd);
+void		destroy_cmtx_rev(char **cmtx, int i);
+void		perr(const char *msg);
+void		perr_exit(const char *msg, int status_code);
+t_bool		perr_failed(const char *msg);
 
 #endif
