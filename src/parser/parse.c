@@ -13,8 +13,8 @@
 #include "cub3d.h"
 
 static t_dlist	*read_input(int fd);
-static void		parse_header(t_engine *engine, t_world *world, t_dlist *lines);
-static void		parse_map(t_engine *engine, t_world *world, t_dlist *lines);
+static t_bool	parse_header(t_engine *engine, t_world *world, t_dlist *raw);
+static t_bool	parse_map(t_engine *engine, t_world *world, t_dlist *raw);
 
 void	parse(char *fpath, t_engine *engine, t_world *world)
 {
@@ -40,19 +40,21 @@ void	parse(char *fpath, t_engine *engine, t_world *world)
 
 static t_dlist	*read_input(int fd)
 {
-	t_dlist	*lines;
+	t_dlist	*raw;
 	char	*line;
 
-	lines = ft_new_dlist();
-	if (!lines)
-		perr_exit("Construction the map line list failed", EXIT_FAILURE);
+	raw = ft_new_dlist();
+	if (!raw)
+		perr_exit("Construction the list lines raw map failed", EXIT_FAILURE);
 	line = ft_get_next_line(fd);
 	while (line)
 	{
-		ft_add_nd_dlist(lines, line, free);
+		ft_add_nd_dlist(raw, ft_strtrim(line, "\n"), free);
+		free(line);
 		line = ft_get_next_line(fd);
 	}
-	return (lines);
+	safe_close_fd(fd);
+	return (raw);
 }
 
 static void	parse_header(t_engine *engine, t_world *world, t_dlist *lines)
@@ -64,30 +66,33 @@ static void	parse_header(t_engine *engine, t_world *world, t_dlist *lines)
 	node = lines->head;
 	while (node)
 	{
-		if (!cardinal[0] && ft_strncmp(node->data, NORTH_TGT, 3) == 0)
-			cardinal[0] = load_texture(engine, world->texs.n, node->data);
-		else if (!cardinal[1] && ft_strncmp(node->data, SOUTH_TGT, 3) == 0)
-			cardinal[1] = load_texture(engine, world->texs.s, node->data);
-		else if (!cardinal[2] && ft_strncmp(node->data, WEST_TGT, 3) == 0)
-			cardinal[2] = load_texture(engine, world->texs.w, node->data);
-		else if (!cardinal[3] && ft_strncmp(node->data, EAST_TGT, 3) == 0)
-			cardinal[3] = load_texture(engine, world->texs.e, node->data);
-		else if (ft_strncmp(node->data, "C", 1) == 0)
-			world->ceil_rgb = parse_rgb(node->data);
-		else if (ft_strncmp(node->data, "F", 1) == 0)
-			world->floor_rgb = parse_rgb(node->data);
+		if (!chk[0] && ft_strncmp(node->data, NORTH_TGT, 3) == 0)
+			chk[0] = load_texture(engine, world->texs.n, node->data);
+		else if (!chk[1] && ft_strncmp(node->data, SOUTH_TGT, 3) == 0)
+			chk[1] = load_texture(engine, world->texs.s, node->data);
+		else if (!chk[2] && ft_strncmp(node->data, WEST_TGT, 3) == 0)
+			chk[2] = load_texture(engine, world->texs.w, node->data);
+		else if (!chk[3] && ft_strncmp(node->data, EAST_TGT, 3) == 0)
+			chk[3] = load_texture(engine, world->texs.e, node->data);
+		else if (ft_strncmp(node->data, CEIL_TGT, 2) == 0)
+			chk[4] = load_color(node->data, &world->ceil_rgb);
+		else if (ft_strncmp(node->data, FLOOR_TGT, 2) == 0)
+			chk[5] = load_color(node->data, &world->floor_rgb);
 		node = node->right;
 	}
+	if (ft_indexof_dlist(raw, node) > ft_indexof_dlist(raw, get_start_map(raw)))
+		return (perr_failed("The header map is not valid"));
+	return (chk[0] & chk[1] & chk[2] & chk[3] & chk[4] & chk[5]);
 }
 
-static void	parse_map(t_engine *engine, t_world *world, t_dlist *lines)
+static t_bool	parse_map(t_engine *engine, t_world *world, t_dlist *raw)
 {
 	t_bnode	*node;
 
-	node = lines->tail;
-	while (node)
-	{
-		// TODO: implements parse map
-		node = node->left;
-	}
+	node = get_start_map(raw);
+	count_map_size(world, node);
+	new_rawmap(world, node);
+	if (!analize_map(world))
+		return (perr_failed("The map is not valid"));
+	return (TRUE);
 }
