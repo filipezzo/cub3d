@@ -6,7 +6,7 @@
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 10:59:17 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/18 19:47:12 by fsousa           ###   ########.fr       */
+/*   Updated: 2026/02/19 14:25:40 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define TEX_W 2
 # define TEX_E 3
 # define TEX_COUNT 4
+# define TEX_SIZE 64
 # define GAME_WIDTH 720
 # define GAME_HEIGHT 400
 # define TILE 8

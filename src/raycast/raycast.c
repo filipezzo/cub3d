@@ -6,7 +6,7 @@
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 18:22:41 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/18 19:32:06 by fsousa           ###   ########.fr       */
+/*   Updated: 2026/02/19 14:28:02 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,29 +66,46 @@ static double	perp_dist(t_world *w, double r[7], int m[4], int side)
 	return (d);
 }
 
-static void	draw_column(t_game *g, int x, int side, double d)
+static void	render_col(t_game *g, int x, double r[7], int m[4])
 {
+	int			side;
+	double		d;
+	double		wall_x;
+	int			tex_x;
 	int			h;
 	int			y0;
 	int			y1;
 	uint32_t	c;
 
+	side = ray_dda(&g->world, r, m);
+	if (side < 0)
+		return ;
+	d = perp_dist(&g->world, r, m, side);
+	if (side == 0)
+		wall_x = g->world.py + d * r[2];
+	else
+		wall_x = g->world.px + d * r[1];
+	wall_x -= floor(wall_x);
+	tex_x = (int)(wall_x * (double)TEX_SIZE);
+	if (side == 0 && m[2] == 1)
+		tex_x = TEX_SIZE - tex_x - 1;
+	if (side == 1 && m[3] == -1)
+		tex_x = TEX_SIZE - tex_x - 1;
 	h = (int)(g->eng.frame.h / d);
 	y0 = -h / 2 + g->eng.frame.h / 2;
 	y1 = h / 2 + g->eng.frame.h / 2;
 	c = g->world.wall_rgb;
 	if (side == 1)
 		c = shade(c);
+	(void)tex_x;
 	draw_vline(&g->eng.frame, x, y0, y1, c);
 }
 
 void	raycast_walls(t_game *g)
 {
 	int		x;
-	int		side;
 	int		m[4];
 	double	r[7];
-	double	d;
 
 	if (!g)
 		return ;
@@ -96,12 +113,7 @@ void	raycast_walls(t_game *g)
 	while (x < g->eng.frame.w)
 	{
 		ray_setup(g, x, r, m);
-		side = ray_dda(&g->world, r, m);
-		if (side >= 0)
-		{
-			d = perp_dist(&g->world, r, m, side);
-			draw_column(g, x, side, d);
-		}
+		render_col(g, x, r, m);
 		x++;
 	}
 }
