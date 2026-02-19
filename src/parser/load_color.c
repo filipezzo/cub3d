@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_rgb.c                                        :+:      :+:    :+:   */
+/*   load_color.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 10:42:58 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/12 12:00:07 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/19 10:41:17 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,24 @@
 static int		get_color(char **pvt);
 static t_bool	is_valid_colors(int red, int green, int blue);
 
-uint32_t	parse_rgb(const char *str)
+t_bool	load_color(const char *str, uint32_t *color)
 {
 	int		red;
 	int		green;
 	int		blue;
 	char	*pvt;
 
+	*color = 0U;
 	if (!str)
-		return (0U);
+		return (perr_failed("No color was specified"));
 	pvt = str;
 	red = get_color(&pvt);
 	green = get_color(&pvt);
 	blue = get_color(&pvt);
 	if (!is_valid_colors(red, green, blue))
-		return (0U);
-	return ((uint32_t)(red << 16 | green << 8 | blue));
+		return (perr_failed("The colors entered are invalid"));
+	*color = (uint32_t)(red << 16 | green << 8 | blue);
+	return (TRUE);
 }
 
 static int	get_color(char **pvt)
@@ -47,7 +49,7 @@ static int	get_color(char **pvt)
 	color = ft_atoi(*pvt);
 	while (**pvt && ft_isdigit(**pvt))
 		(*pvt)++;
-	return (-1);
+	return (color);
 }
 
 static t_bool	is_valid_colors(int red, int green, int blue)
