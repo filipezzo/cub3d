@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 14:20:47 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/19 15:51:49 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/19 15:59:36 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void		normalize_rawmap(t_world *world)
 			aux = normalize_line_rawmap(world->grid[x], normal);
 			if (!aux)
 			{
-				destroy_world(world);
+				destroy_world(world); // TODO: implements
 				perr_exit("Normalization of the Raw Map failed", EXIT_FAILURE);
 			}
 			free(world->grid[x]);
