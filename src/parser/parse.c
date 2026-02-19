@@ -18,22 +18,24 @@ static void		parse_map(t_engine *engine, t_world *world, t_dlist *lines);
 
 void	parse(char *fpath, t_engine *engine, t_world *world)
 {
-	t_dlist	*lines;
+	t_dlist	*raw;
 	int		fd;
+	char	chk[2];
 
 	if (!fpath || !*fpath)
 		perr_exit("No path the map file was provided", EXIT_FAILURE);
-	if (!validate_fpath(fpath, ".cub", &fd))
-	{
-		safe_close_fd(fd);
+	fd = validate_fpath(fpath, ".cub");
+	if (fd == -1)
 		exit(EXIT_FAILURE);
+	raw = read_input(fd);
+	chk[0] = parse_header(engine, world, raw);
+	chk[1] = parse_map(engine, world, raw);
+	ft_destroy_dlist(raw);
+	if (!(chk[0] & chk[1]))
+	{
+		destroy_world(world); // TODO: implements
+		perr_exit("The file Cub3D map is invalid", EXIT_FAILURE);
 	}
-	safe_close_fd(fd);
-	lines = read_input(fd);
-	// TODO: implement 👇
-	parse_header(engine, world, lines);
-	parse_map(engine, world, lines);
-	ft_destroy_dlist(lines);
 }
 
 static t_dlist	*read_input(int fd)
