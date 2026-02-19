@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 12:07:42 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/14 01:52:42 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/19 15:59:24 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ static t_dlist	*read_input(int fd)
 	return (raw);
 }
 
-static void	parse_header(t_engine *engine, t_world *world, t_dlist *lines)
+static t_bool	parse_header(t_engine *engine, t_world *world, t_dlist *raw)
 {
 	t_bnode	*node;
-	t_bool	cardinal[4];
+	char	chk[6];
 
-	ft_memset(cardinal, 0, 4);
-	node = lines->head;
-	while (node)
+	ft_memset(chk, FALSE, 6);
+	node = raw->head;
+	while (node && !(chk[0] & chk[1] & chk[2] & chk[3] & chk[4] & chk[5]))
 	{
 		if (!chk[0] && ft_strncmp(node->data, NORTH_TGT, 3) == 0)
 			chk[0] = load_texture(engine, world->texs.n, node->data);
