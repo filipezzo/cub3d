@@ -38,6 +38,8 @@
 # define SOUTH_TGT "SO "
 # define WEST_TGT "WE "
 # define EAST_TGT "EA "
+# define CEIL_TGT "C "
+# define FLOOR_TGT "F "
 
 typedef struct s_world		t_world;
 typedef struct s_data		t_data;
