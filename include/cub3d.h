@@ -6,7 +6,7 @@
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 10:59:17 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/20 14:42:01 by fsousa           ###   ########.fr       */
+/*   Updated: 2026/02/20 16:10:49 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,43 @@ typedef struct s_tex
 	t_data		img;
 }				t_tex;
 
+typedef struct s_rect
+{
+	int			x;
+	int			y;
+	int			w;
+	int			h;
+	uint32_t	color;
+}				t_rect;
+
+typedef struct s_line
+{
+	int			x0;
+	int			y0;
+	int			x1;
+	int			y1;
+	uint32_t	color;
+}				t_line;
+
+typedef struct s_dda
+{
+	double		dx;
+	double		dy;
+	double		steps;
+	double		x;
+	double		y;
+	double		x_inc;
+	double		y_inc;
+}				t_dda;
+
+typedef struct s_mm
+{
+	int			x;
+	int			y;
+	int			px;
+	int			py;
+}				t_mm;
+
 typedef struct s_ray
 {
 	int			x;
@@ -138,10 +175,7 @@ int				on_key_press(int keycode, void *param);
 int				on_key_release(int keycode, void *param);
 int				on_destroy(void *param);
 void			player_update(t_game *game);
-void			render_minimap(t_game *game);
-void			raycast_walls(t_game *g);
 void			render_frame(t_game *g);
-void			draw_vline(t_data *img, int x, int y0, int y1, uint32_t color);
 void			draw_floor_ceil(t_engine *e, t_world *w);
 void			raycast_walls(t_game *g);
 int				textures_load(t_game *g);
@@ -154,4 +188,8 @@ void			ray_project(t_ray *r, t_game *g);
 void			ray_draw_column(t_game *g, t_ray *r);
 void			game_shutdown(t_game *g);
 void			build_move_vec(double v[2], t_world *w, t_input *in);
+void			render_minimap(t_game *game);
+void			draw_rect(t_data *img, t_rect r);
+void			draw_line(t_data *img, t_line l);
+int				clamp_int(int v, int lo, int hi);
 #endif

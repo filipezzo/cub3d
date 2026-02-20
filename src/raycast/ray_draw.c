@@ -6,13 +6,13 @@
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 17:23:12 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/19 17:46:26 by fsousa           ###   ########.fr       */
+/*   Updated: 2026/02/20 16:10:35 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	clamp_int(int v, int lo, int hi)
+int	clamp_int(int v, int lo, int hi)
 {
 	if (v < lo)
 		return (lo);

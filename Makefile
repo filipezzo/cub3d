@@ -6,7 +6,7 @@
 #    By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 10:52:32 by fsousa            #+#    #+#              #
-#    Updated: 2026/02/20 14:42:43 by fsousa           ###   ########.fr        #
+#    Updated: 2026/02/20 16:20:21 by fsousa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,9 +35,9 @@ MLX_A = $(MLX_DIR)/libmlx.a
 SRC_FILES = main.c
 ENGINE_FILES = engine_init.c engine_tick.c engine_shutdown.c engine_register_hooks.c engine_events.c
 MOCK_FILES = mock_world.c
-RENDER_FILES = pixel.c render_draw.c minimap.c render_frame.c
+RENDER_FILES = pixel.c render_draw.c minimap.c render_frame.c render_minimap.c
 PLAYER_FILES = player_update.c player_update_utils.c
-RAYCAST_FILES = raycast.c ray_dda.c ray_draw.c ray_init.c ray_project.c raycast_draw_text.c
+RAYCAST_FILES = raycast.c ray_dda.c ray_draw.c ray_init.c ray_project.c 
 TEXTURES_FILES = textures.c textures_utils.c
 CLEAN_FILES = game_shutdown.c
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))	\
@@ -52,7 +52,7 @@ SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))	\
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 HEADER = $(INCLUDE_DIR)/cub3d.h
 
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -MMD -MP
 IFLAGS = -I $(INCLUDE_DIR)
 LDFLAGS  = -L $(LIBS_DIR)/libft -L $(MLX_DIR)

@@ -6,7 +6,7 @@
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 17:32:52 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/20 14:13:45 by fsousa           ###   ########.fr       */
+/*   Updated: 2026/02/20 16:21:51 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	world_fake(t_world *out)
 	static char	*arr[] = {
 		"1111111111",
 		"1000000001",
-		"1000000001",
-		"1000000001",
+		"1000010001",
+		"1001000101",
 		"1000010001",
 		"1111111111",
 		NULL
@@ -36,7 +36,6 @@ void	world_fake(t_world *out)
 	out->floor_rgb = 0x00BDB39B;
 	out->ceil_rgb = 0x00101424;
 	out->wall_rgb = 0x00FF00FF;
-
 	out->tex_path[TEX_N] = "../assets/textures/north.xpm";
 	out->tex_path[TEX_S] = "../assets/textures/south.xpm";
 	out->tex_path[TEX_W] = "../assets/textures/west.xpm";

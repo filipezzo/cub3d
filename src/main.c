@@ -6,7 +6,7 @@
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 11:00:55 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/20 14:30:08 by fsousa           ###   ########.fr       */
+/*   Updated: 2026/02/20 16:02:11 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	main(void)
 	world_fake(&game.world);
 	if (!engine_init(&game.eng, GAME_WIDTH, GAME_HEIGHT, "cub3d"))
 		return (1);
-	if(!textures_load(&game))
+	if (!textures_load(&game))
 	{
-		ft_putstr_fd("Error: textures_load failed",2);
+		ft_putstr_fd("Error: textures_load failed", 2);
 		engine_shutdown(&game.eng);
 		return (1);
 	}
