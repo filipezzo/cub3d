@@ -33,7 +33,7 @@ void	parse(char *fpath, t_engine *engine, t_world *world)
 	ft_destroy_dlist(raw);
 	if (!(chk[0] & chk[1]))
 	{
-		destroy_world(world); // TODO: implements
+		cleanup(engine, world);
 		perr_exit("The file Cub3D map is invalid", EXIT_FAILURE);
 	}
 }
@@ -92,7 +92,7 @@ static t_bool	parse_map(t_engine *engine, t_world *world, t_dlist *raw)
 	node = get_start_map(raw);
 	count_map_size(world, node);
 	new_rawmap(world, node);
-	if (!analize_map(world))
+	if (!analize_map(engine, world))
 		return (perr_failed("The map is not valid"));
 	return (TRUE);
 }
