@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 21:50:09 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/19 15:54:33 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/20 01:47:35 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	set_vec2(double x, double y, double *tx, double *ty)
 {
 	*tx = x;
-	*ty = x;
+	*ty = y;
 }
