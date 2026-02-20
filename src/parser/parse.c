@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 12:07:42 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/20 01:49:32 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/20 15:06:41 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	parse(char *fpath, t_engine *engine, t_world *world)
 static t_dlist	*read_input(int fd)
 {
 	t_dlist	*raw;
+	char	*aux;
 	char	*line;
 
 	raw = ft_new_dlist();
@@ -49,7 +50,11 @@ static t_dlist	*read_input(int fd)
 	line = ft_get_next_line(fd);
 	while (line)
 	{
-		ft_add_nd_dlist(raw, ft_strtrim(line, "\n"), free);
+		aux = ft_strtrim(line, "\n");
+		if (ft_strlen(aux) > 0)
+			ft_add_nd_dlist(raw, aux, free);
+		else
+			free(aux);
 		free(line);
 		line = ft_get_next_line(fd);
 	}
