@@ -6,27 +6,27 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 14:20:47 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/19 15:59:36 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/20 01:34:10 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static size_t	find_normal_rawmap(t_world *world);
-static char		*normalize_line_rawmap(char *line, size_t n);
-static void		normalize_rawmap(t_world *world);
+static int	find_normal_rawmap(t_world *world);
+static char		*normalize_line_rawmap(char *line, int n);
+static void		normalize_rawmap(t_engine *engine, t_world *world);
 static t_bool	flood_and_fill(t_world *world, char **map, int x, int y);
 
-t_bool	analize_map(t_world *world)
+t_bool	analize_map(t_engine *engine, t_world *world)
 {
 	t_bool	is_valid;
 
-	normalize_rawmap(world);
+	normalize_rawmap(engine, world);
 	is_valid = flood_and_fill(world, world->grid, 0, 0);
 	return (is_valid);
 }
 
-static size_t	find_normal_rawmap(t_world *world)
+static int	find_normal_rawmap(t_world *world)
 {
 	int	x;
 	int	aux;
@@ -44,7 +44,7 @@ static size_t	find_normal_rawmap(t_world *world)
 	return (max);
 }
 
-static char	*normalize_line_rawmap(char *line, size_t n)
+static char	*normalize_line_rawmap(char *line, int n)
 {
 	int		i;
 	char	*new;
@@ -69,7 +69,7 @@ static char	*normalize_line_rawmap(char *line, size_t n)
 	return (new);
 }
 
-static void		normalize_rawmap(t_world *world)
+static void		normalize_rawmap(t_engine *engine, t_world *world)
 {
 	int		x;
 	int		size;
@@ -86,7 +86,7 @@ static void		normalize_rawmap(t_world *world)
 			aux = normalize_line_rawmap(world->grid[x], normal);
 			if (!aux)
 			{
-				destroy_world(world); // TODO: implements
+				cleanup(engine, world);
 				perr_exit("Normalization of the Raw Map failed", EXIT_FAILURE);
 			}
 			free(world->grid[x]);
@@ -101,16 +101,15 @@ static t_bool	flood_and_fill(t_world *world, char **map, int x, int y)
 	if (x < 0 || y < 0 || x >= world->w || y >= world->h)
 		return (FALSE);
 
-    if (map[y][x] == '1' || map[y][x] == 'V')
+	if (map[y][x] == '1' || map[y][x] == 'V')
 		return (TRUE);
 
-    if (map[y][x] == ' ')
-        return (FALSE);
-
-    map[y][x] = 'V';
-    flood_fill(map, x+1, y, world);
-    flood_fill(map, x-1, y, world);
-    flood_fill(map, x, y+1, world);
-    flood_fill(map, x, y-1, world);
+	if (map[y][x] == ' ')
+		return (FALSE);
+	map[y][x] = 'V';
+	flood_and_fill(world, map, x + 1, y);
+	flood_and_fill(world, map, x - 1, y);
+	flood_and_fill(world, map, x, y + 1);
+	flood_and_fill(world, map, x, y - 1);
 	return (TRUE);
 }
