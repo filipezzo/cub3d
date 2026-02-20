@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 10:42:58 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/19 10:41:17 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/20 01:35:30 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_bool	load_color(const char *str, uint32_t *color)
 	*color = 0U;
 	if (!str)
 		return (perr_failed("No color was specified"));
-	pvt = str;
+	pvt = (char *)str;
 	red = get_color(&pvt);
 	green = get_color(&pvt);
 	blue = get_color(&pvt);
