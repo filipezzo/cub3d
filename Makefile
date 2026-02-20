@@ -6,7 +6,7 @@
 #    By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 10:52:32 by fsousa            #+#    #+#              #
-#    Updated: 2026/02/13 12:39:29 by fsousa           ###   ########.fr        #
+#    Updated: 2026/02/20 14:31:01 by fsousa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,10 @@ ENGINE_DIR = $(SRC_DIR)/engine
 MOCK_DIR = $(SRC_DIR)/mock
 RENDER_DIR = $(SRC_DIR)/render
 PLAYER_DIR = $(SRC_DIR)/player
+RAYCAST_DIR = $(SRC_DIR)/raycast
 MLX_DIR = libs/mlx
+TEXTURES_DIR = $(SRC_DIR)/textures
+CLEAN_DIR = $(SRC_DIR)/clean
 
 
 EXEC = $(BIN_DIR)/$(NAME)
@@ -32,15 +35,20 @@ MLX_A = $(MLX_DIR)/libmlx.a
 SRC_FILES = main.c
 ENGINE_FILES = engine_init.c engine_tick.c engine_shutdown.c engine_register_hooks.c engine_events.c
 MOCK_FILES = mock_world.c
-RENDER_FILES = pixel.c draw.c minimap.c
+RENDER_FILES = pixel.c render_draw.c minimap.c render_frame.c
 PLAYER_FILES = player_update.c
-
+RAYCAST_FILES = raycast.c ray_dda.c ray_draw.c ray_init.c ray_project.c raycast_draw_text.c
+TEXTURES_FILES = textures.c textures_utils.c
+CLEAN_FILES = game_shutdown.c
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))	\
 		$(addprefix $(ENGINE_DIR)/, $(ENGINE_FILES)) 	\
 		$(addprefix $(MOCK_DIR)/, $(MOCK_FILES))	\
 		$(addprefix $(RENDER_DIR)/, $(RENDER_FILES))	\
 		$(addprefix $(PLAYER_DIR)/, $(PLAYER_FILES))	\
-
+		$(addprefix $(RAYCAST_DIR)/, $(RAYCAST_FILES))	\
+		$(addprefix $(TEXTURES_DIR)/, $(TEXTURES_FILES))	\
+		$(addprefix $(CLEAN_DIR)/, $(CLEAN_FILES))	\
+		
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 HEADER = $(INCLUDE_DIR)/cub3d.h
 

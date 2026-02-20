@@ -6,7 +6,7 @@
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 16:00:32 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/18 16:00:33 by fsousa           ###   ########.fr       */
+/*   Updated: 2026/02/20 14:26:19 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	engine_shutdown(t_engine *e)
 {
+	if (!e)
+		return ;
 	if (e->frame.img)
 	{
 		mlx_destroy_image(e->mlx, e->frame.img);

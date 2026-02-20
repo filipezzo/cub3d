@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   textures_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/05 11:00:55 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/20 14:30:08 by fsousa           ###   ########.fr       */
+/*   Created: 2026/02/19 16:30:00 by fsousa            #+#    #+#             */
+/*   Updated: 2026/02/20 12:49:25 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(void)
+uint32_t	tex_get_pixel(t_data *img, int x, int y)
 {
-	t_game	game;
+	char	*dst;
 
-	ft_bzero(&game, sizeof(game));
-	world_fake(&game.world);
-	if (!engine_init(&game.eng, GAME_WIDTH, GAME_HEIGHT, "cub3d"))
-		return (1);
-	if(!textures_load(&game))
+	if (!img || !img->addr)
+		return (0);
+	if (x < 0 || y < 0 || x >= img->w || y >= img->h)
+		return (0);
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	return (*(uint32_t *)dst);
+}
+
+int	ray_tex_id(t_ray *r)
+{
+	if (r->side == 0)
 	{
-		ft_putstr_fd("Error: textures_load failed",2);
-		engine_shutdown(&game.eng);
-		return (1);
+		if (r->step_x == 1)
+			return (TEX_E);
+		return (TEX_W);
 	}
-	engine_register_hooks(&game);
-	mlx_loop(game.eng.mlx);
-	return (0);
+	if (r->step_y == 1)
+		return (TEX_S);
+	return (TEX_N);
 }
