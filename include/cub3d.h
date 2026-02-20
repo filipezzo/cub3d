@@ -6,7 +6,7 @@
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 10:59:17 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/20 14:28:57 by fsousa           ###   ########.fr       */
+/*   Updated: 2026/02/20 14:42:01 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ typedef struct s_game
 
 void			world_fake(t_world *out);
 void			put_pixel(t_data *img, int x, int y, uint32_t color);
-void			draw_test(t_engine *e);
 int				engine_init(t_engine *e, int w, int h, const char *title);
 int				engine_tick(void *param);
 void			engine_shutdown(t_engine *e);
@@ -154,4 +153,5 @@ int				ray_dda(t_ray *r, t_world *w);
 void			ray_project(t_ray *r, t_game *g);
 void			ray_draw_column(t_game *g, t_ray *r);
 void			game_shutdown(t_game *g);
+void			build_move_vec(double v[2], t_world *w, t_input *in);
 #endif

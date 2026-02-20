@@ -6,7 +6,7 @@
 #    By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 10:52:32 by fsousa            #+#    #+#              #
-#    Updated: 2026/02/20 14:31:01 by fsousa           ###   ########.fr        #
+#    Updated: 2026/02/20 14:42:43 by fsousa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SRC_FILES = main.c
 ENGINE_FILES = engine_init.c engine_tick.c engine_shutdown.c engine_register_hooks.c engine_events.c
 MOCK_FILES = mock_world.c
 RENDER_FILES = pixel.c render_draw.c minimap.c render_frame.c
-PLAYER_FILES = player_update.c
+PLAYER_FILES = player_update.c player_update_utils.c
 RAYCAST_FILES = raycast.c ray_dda.c ray_draw.c ray_init.c ray_project.c raycast_draw_text.c
 TEXTURES_FILES = textures.c textures_utils.c
 CLEAN_FILES = game_shutdown.c

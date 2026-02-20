@@ -6,27 +6,12 @@
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:33:27 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/13 12:37:13 by fsousa           ###   ########.fr       */
+/*   Updated: 2026/02/20 14:44:16 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	clear_frame(t_data *img, uint32_t color)
-{
-	int x, y;
-	y = 0;
-	while (y < img->h)
-	{
-		x = 0;
-		while (x < img->w)
-		{
-			put_pixel(img, x, y, color);
-			x++;
-		}
-		y++;
-	}
-}
 
 static void	draw_rect(t_data *img, int x0, int y0, int w, int h, uint32_t color)
 {
@@ -83,7 +68,7 @@ void	render_minimap(t_game *game)
 	int x, y;
 	int px, py;
 	int dx, dy;
-	clear_frame(&game->eng.frame, 0x00000000);
+	
 	y = 0;
 	while (y < game->world.h)
 	{

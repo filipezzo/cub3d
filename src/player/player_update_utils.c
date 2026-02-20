@@ -1,22 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_frame.c                                     :+:      :+:    :+:   */
+/*   player_update_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/18 16:07:38 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/20 14:38:49 by fsousa           ###   ########.fr       */
+/*   Created: 2026/02/20 14:41:15 by fsousa            #+#    #+#             */
+/*   Updated: 2026/02/20 14:41:30 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	render_frame(t_game *g)
+void	build_move_vec(double v[2], t_world *w, t_input *in)
 {
-	if (!g)
-		return ;
-	draw_floor_ceil(&g->eng, &g->world);
-	raycast_walls(g);
-	render_minimap(g);
+	v[0] = 0.0;
+	v[1] = 0.0;
+	if (in->w && !in->s)
+	{
+		v[0] += w->dir_x;
+		v[1] += w->dir_y;
+	}
+	else if (in->s && !in->w)
+	{
+		v[0] -= w->dir_x;
+		v[1] -= w->dir_y;
+	}
+	if (in->d && !in->a)
+	{
+		v[0] += -w->dir_y;
+		v[1] += w->dir_x;
+	}
+	else if (in->a && !in->d)
+	{
+		v[0] -= -w->dir_y;
+		v[1] -= w->dir_x;
+	}
 }
