@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 17:17:56 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/18 17:21:29 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/19 23:12:29 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	destroy_cmtx_rev(char **cmtx, int i)
 		return ;
 	while (i >= 0)
 	{
-		free(cmtx[i]);
+		if (cmtx[i])
+			free(cmtx[i]);
 		i--;
 	}
 	free(cmtx);
