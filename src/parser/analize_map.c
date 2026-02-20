@@ -28,9 +28,9 @@ t_bool	analize_map(t_world *world)
 
 static size_t	find_normal_rawmap(t_world *world)
 {
-	size_t	x;
-	size_t	aux;
-	size_t	max;
+	int	x;
+	int	aux;
+	int	max;
 
 	x = 0;
 	max = 0;
@@ -46,10 +46,10 @@ static size_t	find_normal_rawmap(t_world *world)
 
 static char	*normalize_line_rawmap(char *line, size_t n)
 {
-	size_t	i;
+	int		i;
 	char	*new;
 
-	if (!line || n == 0 || (line && ft_strlen(line) >= n))
+	if (!line || n == 0 || (line && ft_strlen(line) >= (size_t)n))
 		return (NULL);
 	new = ft_calloc(n + 1, sizeof(char));
 	if (!new)
@@ -71,9 +71,9 @@ static char	*normalize_line_rawmap(char *line, size_t n)
 
 static void		normalize_rawmap(t_world *world)
 {
-	size_t	x;
-	size_t	size;
-	size_t	normal;
+	int		x;
+	int		size;
+	int		normal;
 	char	*aux;
 
 	x = 0;
