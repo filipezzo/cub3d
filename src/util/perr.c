@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 13:34:16 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/19 15:49:11 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/20 01:47:57 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	perr(const char *msg)
 {
 	ft_putstr_fd("[error] ", STDERR_FILENO);
-	ft_putstr_fd(msg, STDERR_FILENO);
+	ft_putstr_fd((char *)msg, STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
 }
 
