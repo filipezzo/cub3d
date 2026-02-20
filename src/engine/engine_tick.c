@@ -6,7 +6,7 @@
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:34:25 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/18 16:04:32 by fsousa           ###   ########.fr       */
+/*   Updated: 2026/02/20 14:29:27 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	engine_tick(void *param)
 		return (0);
 	if (!game->eng.running)
 	{
-		engine_shutdown(&game->eng);
+		game_shutdown(game);
 		exit(0);
 	}
 	player_update(game);
-	render_minimap(game);
+	render_frame(game);
 	mlx_put_image_to_window(game->eng.mlx, game->eng.win, game->eng.frame.img,
 		0, 0);
 	return (0);

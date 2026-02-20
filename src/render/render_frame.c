@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine_shutdown.c                                  :+:      :+:    :+:   */
+/*   render_frame.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/18 16:00:32 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/20 14:26:19 by fsousa           ###   ########.fr       */
+/*   Created: 2026/02/18 16:07:38 by fsousa            #+#    #+#             */
+/*   Updated: 2026/02/20 14:38:49 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	engine_shutdown(t_engine *e)
+void	render_frame(t_game *g)
 {
-	if (!e)
+	if (!g)
 		return ;
-	if (e->frame.img)
-	{
-		mlx_destroy_image(e->mlx, e->frame.img);
-		e->frame.img = NULL;
-	}
-	if (e->win)
-	{
-		mlx_destroy_window(e->mlx, e->win);
-		e->win = NULL;
-	}
-	if (e->mlx)
-	{
-		mlx_destroy_display(e->mlx);
-		free(e->mlx);
-		e->mlx = NULL;
-	}
+	draw_floor_ceil(&g->eng, &g->world);
+	raycast_walls(g);
+	render_minimap(g);
 }

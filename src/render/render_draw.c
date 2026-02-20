@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine_shutdown.c                                  :+:      :+:    :+:   */
+/*   render_draw.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/18 16:00:32 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/20 14:26:19 by fsousa           ###   ########.fr       */
+/*   Created: 2026/02/18 17:40:22 by fsousa            #+#    #+#             */
+/*   Updated: 2026/02/20 16:01:48 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	engine_shutdown(t_engine *e)
+void	draw_floor_ceil(t_engine *e, t_world *w)
 {
-	if (!e)
+	int	x;
+	int	y;
+
+	if (!e || !w)
 		return ;
-	if (e->frame.img)
+	y = 0;
+	while (y < e->frame.h)
 	{
-		mlx_destroy_image(e->mlx, e->frame.img);
-		e->frame.img = NULL;
-	}
-	if (e->win)
-	{
-		mlx_destroy_window(e->mlx, e->win);
-		e->win = NULL;
-	}
-	if (e->mlx)
-	{
-		mlx_destroy_display(e->mlx);
-		free(e->mlx);
-		e->mlx = NULL;
+		x = 0;
+		while (x < e->frame.w)
+		{
+			if (y < e->frame.h / 2)
+				put_pixel(&e->frame, x, y, w->ceil_rgb);
+			else
+				put_pixel(&e->frame, x, y, w->floor_rgb);
+			x++;
+		}
+		y++;
 	}
 }

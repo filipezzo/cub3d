@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine_shutdown.c                                  :+:      :+:    :+:   */
+/*   player_update_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/18 16:00:32 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/20 14:26:19 by fsousa           ###   ########.fr       */
+/*   Created: 2026/02/20 14:41:15 by fsousa            #+#    #+#             */
+/*   Updated: 2026/02/20 14:41:30 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	engine_shutdown(t_engine *e)
+void	build_move_vec(double v[2], t_world *w, t_input *in)
 {
-	if (!e)
-		return ;
-	if (e->frame.img)
+	v[0] = 0.0;
+	v[1] = 0.0;
+	if (in->w && !in->s)
 	{
-		mlx_destroy_image(e->mlx, e->frame.img);
-		e->frame.img = NULL;
+		v[0] += w->dir_x;
+		v[1] += w->dir_y;
 	}
-	if (e->win)
+	else if (in->s && !in->w)
 	{
-		mlx_destroy_window(e->mlx, e->win);
-		e->win = NULL;
+		v[0] -= w->dir_x;
+		v[1] -= w->dir_y;
 	}
-	if (e->mlx)
+	if (in->d && !in->a)
 	{
-		mlx_destroy_display(e->mlx);
-		free(e->mlx);
-		e->mlx = NULL;
+		v[0] += -w->dir_y;
+		v[1] += w->dir_x;
+	}
+	else if (in->a && !in->d)
+	{
+		v[0] -= -w->dir_y;
+		v[1] -= w->dir_x;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 15:34:42 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/13 15:45:01 by fsousa           ###   ########.fr       */
+/*   Updated: 2026/02/20 16:07:36 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,19 @@ static int	sign_d(double v)
 	return (0);
 }
 
-static void	try_move(t_world *w, double nx, double ny, double vx, double vy)
+static void	try_move(t_world *w, double nx, double ny, double old[2])
 {
 	int	sx;
 	int	sy;
 
-	sx = sign_d(vx);
-	sy = sign_d(vy);
+	sx = sign_d(nx - old[0]);
+	sy = sign_d(ny - old[1]);
 	if (sx == 0)
 	{
-		if (cell_ok(w, nx, w->py))
+		if (cell_ok(w, nx, old[1]))
 			w->px = nx;
 	}
-	else if (cell_ok(w, nx + (sx * COL_PAD), w->py))
+	else if (cell_ok(w, nx + (sx * COL_PAD), old[1]))
 		w->px = nx;
 	if (sy == 0)
 	{
@@ -73,11 +73,9 @@ void	player_update(t_game *g)
 {
 	t_world	*w;
 	t_input	*in;
-	double	vx;
-	double	vy;
+	double	v[2];
 	double	len;
-	double	sx;
-	double	sy;
+	double	old[2];
 
 	w = &g->world;
 	in = &g->in;
@@ -85,35 +83,14 @@ void	player_update(t_game *g)
 		rotate_view(w, -ROT_SPEED);
 	if (in->right)
 		rotate_view(w, ROT_SPEED);
-	vx = 0.0;
-	vy = 0.0;
-	if (in->w && !in->s)
-	{
-		vx += w->dir_x;
-		vy += w->dir_y;
-	}
-	else if (in->s && !in->w)
-	{
-		vx -= w->dir_x;
-		vy -= w->dir_y;
-	}
-	sx = -w->dir_y;
-	sy = w->dir_x;
-	if (in->d && !in->a)
-	{
-		vx += sx;
-		vy += sy;
-	}
-	else if (in->a && !in->d)
-	{
-		vx -= sx;
-		vy -= sy;
-	}
-	len = sqrt(vx * vx + vy * vy);
+	build_move_vec(v, w, in);
+	len = sqrt(v[0] * v[0] + v[1] * v[1]);
 	if (len > 0.0)
 	{
-		vx /= len;
-		vy /= len;
-		try_move(w, w->px + vx * MOVE_SPEED, w->py + vy * MOVE_SPEED, vx, vy);
+		v[0] /= len;
+		v[1] /= len;
+		old[0] = w->px;
+		old[1] = w->py;
+		try_move(w, w->px + v[0] * MOVE_SPEED, w->py + v[1] * MOVE_SPEED, old);
 	}
 }

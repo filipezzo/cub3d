@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine_shutdown.c                                  :+:      :+:    :+:   */
+/*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/18 16:00:32 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/20 14:26:19 by fsousa           ###   ########.fr       */
+/*   Created: 2026/02/18 18:22:41 by fsousa            #+#    #+#             */
+/*   Updated: 2026/02/20 14:12:00 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	engine_shutdown(t_engine *e)
+void	raycast_walls(t_game *g)
 {
-	if (!e)
+	t_ray	r;
+	int		x;
+
+	if (!g)
 		return ;
-	if (e->frame.img)
+	x = 0;
+	while (x < g->eng.frame.w)
 	{
-		mlx_destroy_image(e->mlx, e->frame.img);
-		e->frame.img = NULL;
-	}
-	if (e->win)
-	{
-		mlx_destroy_window(e->mlx, e->win);
-		e->win = NULL;
-	}
-	if (e->mlx)
-	{
-		mlx_destroy_display(e->mlx);
-		free(e->mlx);
-		e->mlx = NULL;
+		ray_init(&r, g, x);
+		if (ray_dda(&r, &g->world))
+		{
+			ray_project(&r, g);
+			ray_draw_column(g, &r);
+		}
+		x++;
 	}
 }

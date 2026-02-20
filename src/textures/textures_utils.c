@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine_shutdown.c                                  :+:      :+:    :+:   */
+/*   textures_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/18 16:00:32 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/20 14:26:19 by fsousa           ###   ########.fr       */
+/*   Created: 2026/02/19 16:30:00 by fsousa            #+#    #+#             */
+/*   Updated: 2026/02/20 12:49:25 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	engine_shutdown(t_engine *e)
+uint32_t	tex_get_pixel(t_data *img, int x, int y)
 {
-	if (!e)
-		return ;
-	if (e->frame.img)
+	char	*dst;
+
+	if (!img || !img->addr)
+		return (0);
+	if (x < 0 || y < 0 || x >= img->w || y >= img->h)
+		return (0);
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	return (*(uint32_t *)dst);
+}
+
+int	ray_tex_id(t_ray *r)
+{
+	if (r->side == 0)
 	{
-		mlx_destroy_image(e->mlx, e->frame.img);
-		e->frame.img = NULL;
+		if (r->step_x == 1)
+			return (TEX_E);
+		return (TEX_W);
 	}
-	if (e->win)
-	{
-		mlx_destroy_window(e->mlx, e->win);
-		e->win = NULL;
-	}
-	if (e->mlx)
-	{
-		mlx_destroy_display(e->mlx);
-		free(e->mlx);
-		e->mlx = NULL;
-	}
+	if (r->step_y == 1)
+		return (TEX_S);
+	return (TEX_N);
 }
