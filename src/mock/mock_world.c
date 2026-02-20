@@ -6,7 +6,7 @@
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 17:32:52 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/18 19:39:19 by fsousa           ###   ########.fr       */
+/*   Updated: 2026/02/20 14:13:45 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,18 @@
 
 void	world_fake(t_world *out)
 {
-	static char *arr[] = {"11111", "10001", "10001", "10001", "10001", "11111",
-		NULL};
+	static char	*arr[] = {
+		"1111111111",
+		"1000000001",
+		"1000000001",
+		"1000000001",
+		"1000010001",
+		"1111111111",
+		NULL
+	};
 
 	out->grid = arr;
-	out->w = 5;
+	out->w = 10;
 	out->h = 6;
 	out->px = 2.5;
 	out->py = 3.5;
@@ -26,11 +33,12 @@ void	world_fake(t_world *out)
 	out->dir_y = -1.0;
 	out->plane_x = 0.66;
 	out->plane_y = 0.0;
-	out->floor_rgb = 0x00606060;
-	out->ceil_rgb = 0x00202020;
-	out->wall_rgb = 0x000000FF;
-	out->tex_path[TEX_N] = NULL;
-	out->tex_path[TEX_S] = NULL;
-	out->tex_path[TEX_W] = NULL;
-	out->tex_path[TEX_E] = NULL;
+	out->floor_rgb = 0x00BDB39B;
+	out->ceil_rgb = 0x00101424;
+	out->wall_rgb = 0x00FF00FF;
+
+	out->tex_path[TEX_N] = "../assets/textures/north.xpm";
+	out->tex_path[TEX_S] = "../assets/textures/south.xpm";
+	out->tex_path[TEX_W] = "../assets/textures/west.xpm";
+	out->tex_path[TEX_E] = "../assets/textures/east.xpm";
 }

@@ -6,7 +6,7 @@
 /*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 10:59:17 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/19 14:25:40 by fsousa           ###   ########.fr       */
+/*   Updated: 2026/02/20 14:28:57 by fsousa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ typedef struct s_world
 	uint32_t	ceil_rgb;
 	uint32_t	wall_rgb;
 	char		*tex_path[TEX_COUNT];
-
+	int			__side_tmp;
+	int			__tex_tmp;
 }				t_world;
 
 typedef struct s_data
@@ -89,11 +90,42 @@ typedef struct s_input
 	t_bool		right;
 }				t_input;
 
+typedef struct s_tex
+{
+	t_data		img;
+}				t_tex;
+
+typedef struct s_ray
+{
+	int			x;
+	int			map_x;
+	int			map_y;
+	int			step_x;
+	int			step_y;
+	int			side;
+	double		camera_x;
+	double		raydir_x;
+	double		raydir_y;
+	double		delta_x;
+	double		delta_y;
+	double		side_x;
+	double		side_y;
+	double		perp;
+	int			line_h;
+	int			draw0;
+	int			draw1;
+	int			tex_id;
+	int			tex_x;
+	double		tex_step;
+	double		tex_pos;
+}				t_ray;
+
 typedef struct s_game
 {
 	t_engine	eng;
 	t_world		world;
 	t_input		in;
+	t_tex		tex[TEX_COUNT];
 }				t_game;
 
 void			world_fake(t_world *out);
@@ -108,10 +140,18 @@ int				on_key_release(int keycode, void *param);
 int				on_destroy(void *param);
 void			player_update(t_game *game);
 void			render_minimap(t_game *game);
-void			ray_setup(t_game *g, int x, double r[7], int m[4]);
 void			raycast_walls(t_game *g);
 void			render_frame(t_game *g);
 void			draw_vline(t_data *img, int x, int y0, int y1, uint32_t color);
 void			draw_floor_ceil(t_engine *e, t_world *w);
 void			raycast_walls(t_game *g);
+int				textures_load(t_game *g);
+void			textures_destroy(t_game *g);
+uint32_t		tex_get_pixel(t_data *img, int x, int y);
+int				ray_tex_id(t_ray *r);
+void			ray_init(t_ray *r, t_game *g, int x);
+int				ray_dda(t_ray *r, t_world *w);
+void			ray_project(t_ray *r, t_game *g);
+void			ray_draw_column(t_game *g, t_ray *r);
+void			game_shutdown(t_game *g);
 #endif
