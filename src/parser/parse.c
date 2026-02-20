@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 12:07:42 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/19 15:59:24 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/20 01:49:32 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static t_bool	parse_header(t_engine *engine, t_world *world, t_dlist *raw)
 			chk[5] = load_color(node->data, &world->floor_rgb);
 		node = node->right;
 	}
-	if (ft_indexof_dlist(raw, node) > ft_indexof_dlist(raw, get_start_map(raw)))
+	if (ft_getidx_dlist(raw, node) > ft_getidx_dlist(raw, get_start_map(raw)))
 		return (perr_failed("The header map is not valid"));
 	return (chk[0] & chk[1] & chk[2] & chk[3] & chk[4] & chk[5]);
 }
