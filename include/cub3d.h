@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 10:59:17 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/19 20:07:00 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/20 01:33:33 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,25 @@ typedef struct s_data		t_data;
 typedef struct s_textures	t_textures;
 typedef struct s_engine		t_engine;
 
+typedef struct s_data
+{
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	int			w;
+	int			h;
+}				t_data;
+
+typedef struct s_textures
+{
+	t_data		*n;
+	t_data		*s;
+	t_data		*w;
+	t_data		*e;
+}				t_textures;
+
 typedef struct s_world
 {
 	// nosso mapa - LEMBRE-SE QUE O Y CRESCE PARA BAIXO
@@ -77,25 +96,6 @@ typedef struct s_world
 	char		*tex_path[TEX_COUNT];
 	t_textures	texs;
 }				t_world; // MAPA + PLAYER + VISUALS.
-
-typedef struct s_data
-{
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-	int			w;
-	int			h;
-}				t_data;
-
-typedef struct s_textures
-{
-	t_data		*n;
-	t_data		*s;
-	t_data		*w;
-	t_data		*e;
-}				t_textures;
 
 typedef struct s_engine
 {
@@ -138,6 +138,7 @@ void			player_update(t_game *game);
 void			render_minimap(t_game *game);
 
 void			parse(char *fpath, t_engine *engine, t_world *world);
+t_bool			analize_map(t_engine *engine, t_world *world);
 t_bnode			*get_start_map(t_dlist *lines);
 void			count_map_size(t_world *world, t_bnode *node);
 void			new_rawmap(t_world *world, t_bnode *node);
@@ -150,6 +151,9 @@ void			set_vec2(double x, double y, double *tx, double *ty);
 
 void			safe_close_fd(int fd);
 void			destroy_cmtx_rev(char **cmtx, int i);
+void			destroy_world(t_engine *engine, t_world *world);
+void			destroy_engine(t_engine *engine);
+void			cleanup(t_engine *engine, t_world *world);
 void			pinfo(const char *msg);
 void			perr(const char *msg);
 void			perr_exit(const char *msg, int status_code);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+         #
+#    By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 10:52:32 by fsousa            #+#    #+#              #
-#    Updated: 2026/02/13 12:39:29 by fsousa           ###   ########.fr        #
+#    Updated: 2026/02/20 01:50:43 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,9 @@ ENGINE_DIR = $(SRC_DIR)/engine
 MOCK_DIR = $(SRC_DIR)/mock
 RENDER_DIR = $(SRC_DIR)/render
 PLAYER_DIR = $(SRC_DIR)/player
+PARSER_DIR = $(SRC_DIR)/parser
+UTIL_DIR = $(SRC_DIR)/util
 MLX_DIR = libs/mlx
-
 
 EXEC = $(BIN_DIR)/$(NAME)
 
@@ -34,12 +35,16 @@ ENGINE_FILES = engine_init.c engine_tick.c engine_shutdown.c engine_register_hoo
 MOCK_FILES = mock_world.c
 RENDER_FILES = pixel.c draw.c minimap.c
 PLAYER_FILES = player_update.c
+PARSER_FILES = analize_map.c helper_parse_map.c load_color.c load_texture.c parse.c set_vec2.c validate_fpath.c
+UTIL_FILES =  destroy_cmtx_rev.c destroy.c perr.c pinfo.c safe_close_fd.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))	\
 		$(addprefix $(ENGINE_DIR)/, $(ENGINE_FILES)) 	\
 		$(addprefix $(MOCK_DIR)/, $(MOCK_FILES))	\
 		$(addprefix $(RENDER_DIR)/, $(RENDER_FILES))	\
 		$(addprefix $(PLAYER_DIR)/, $(PLAYER_FILES))	\
+		$(addprefix $(PARSER_DIR)/, $(PARSER_FILES))	\
+		$(addprefix $(UTIL_DIR)/, $(UTIL_FILES))
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 HEADER = $(INCLUDE_DIR)/cub3d.h
