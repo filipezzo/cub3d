@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 10:59:17 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/19 16:20:21 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/19 20:07:00 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ void			set_vec2(double x, double y, double *tx, double *ty);
 
 void			safe_close_fd(int fd);
 void			destroy_cmtx_rev(char **cmtx, int i);
+void			pinfo(const char *msg);
 void			perr(const char *msg);
 void			perr_exit(const char *msg, int status_code);
 t_bool			perr_failed(const char *msg);
