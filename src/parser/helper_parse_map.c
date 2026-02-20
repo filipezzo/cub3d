@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map.c                                        :+:      :+:    :+:   */
+/*   helper_parse_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 10:04:58 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/19 15:54:26 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/20 01:35:15 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ t_bnode	*get_start_map(t_dlist *lines)
 
 void	count_map_size(t_world *world, t_bnode *node)
 {
-	int		width;
-	int		height;
-	size_t	len;
+	int	width;
+	int	height;
+	int	len;
 
 	width = 0;
 	height = 0;
@@ -83,7 +83,6 @@ void	set_player_pos(t_world *world, int x)
 {
 	int		y;
 	char	tgt;
-	char	dir;
 
 	y = 0;
 	while (world->grid[x][y])
