@@ -232,9 +232,6 @@ void			set_vec2(double x, double y, double *tx, double *ty);
 
 void			safe_close_fd(int fd);
 void			destroy_cmtx_rev(char **cmtx, int i);
-void			destroy_world(t_engine *engine, t_world *world);
-void			destroy_engine(t_engine *engine);
-void			cleanup(t_engine *engine, t_world *world);
 void			pinfo(const char *msg);
 void			perr(const char *msg);
 void			perr_exit(const char *msg, int status_code);

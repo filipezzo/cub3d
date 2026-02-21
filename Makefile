@@ -6,7 +6,7 @@
 #    By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 10:52:32 by fsousa            #+#    #+#              #
-#    Updated: 2026/02/20 18:16:11 by mhidani          ###   ########.fr        #
+#    Updated: 2026/02/20 20:11:58 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ TEXTURES_FILES	= textures.c textures_utils.c
 PARSER_FILES	= analize_map.c helper_parse_map.c load_color.c load_texture.c \
 				  parse.c set_vec2.c validate_fpath.c
 CLEAN_FILES		= game_shutdown.c
-UTIL_FILES		= destroy_cmtx_rev.c destroy.c perr.c pinfo.c safe_close_fd.c
+UTIL_FILES		= destroy_cmtx_rev.c perr.c pinfo.c safe_close_fd.c
 
 SRCS			= $(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 				  $(addprefix $(ENGINE_DIR)/, $(ENGINE_FILES)) \
