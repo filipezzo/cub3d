@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_color.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 10:42:58 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/20 01:35:30 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/20 21:02:48 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int		get_color(char **pvt);
 static t_bool	is_valid_colors(int red, int green, int blue);
 
-t_bool	load_color(const char *str, uint32_t *color)
+t_bool	load_color(uint32_t *color, const char *str)
 {
 	int		red;
 	int		green;

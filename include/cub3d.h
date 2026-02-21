@@ -225,8 +225,8 @@ void			count_map_size(t_world *world, t_bnode *node);
 void			new_rawmap(t_world *world, t_bnode *node);
 void			set_player_pos(t_world *world, int x);
 void			set_player_dir(t_world *world, char tgt);
-t_bool			load_color(const char *str, uint32_t *color);
-t_bool			load_texture(t_engine *engine, t_data *tex, char *path);
+t_bool			load_color(uint32_t *color, const char *str);
+t_bool			load_texture(t_world *world, int tgt, char *path);
 int				validate_fpath(char *fpath, char *ext);
 void			set_vec2(double x, double y, double *tx, double *ty);
 
