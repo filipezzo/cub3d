@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper_parse_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 10:04:58 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/20 21:48:29 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/21 10:20:58 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	new_rawmap(t_world *world, t_bnode *node)
 			destroy_cmtx_rev(world->grid, i);
 			return ;
 		}
+		world->fov = 0.66;
 		set_player_pos(world, i);
 		node = node->right;
 		i++;
@@ -109,6 +110,6 @@ void	set_player_dir(t_world *world, char tgt)
 		set_vec2(1, 0, &world->dir_x, &world->dir_y);
 	else if (tgt == 'W')
 		set_vec2(-1, 0, &world->dir_x, &world->dir_y);
-	//world->plane_x = -world->dir_y * world->fov;
-	//world->plane_y = world->dir_x * world->fov;
+	world->plane_x = -world->dir_y * world->fov;
+	world->plane_y = world->dir_x * world->fov;
 }

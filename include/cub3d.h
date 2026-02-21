@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 10:59:17 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/20 22:42:18 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/21 10:17:03 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_world
 	double		dir_y;
 	double		plane_x;
 	double		plane_y;
+	double		fov;
 	uint32_t	floor_rgb;
 	uint32_t	ceil_rgb;
 	uint32_t	wall_rgb;
