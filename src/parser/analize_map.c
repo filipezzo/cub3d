@@ -3,45 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   analize_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 14:20:47 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/20 01:34:10 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/20 21:42:03 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	find_normal_rawmap(t_world *world);
 static char		*normalize_line_rawmap(char *line, int n);
-static void		normalize_rawmap(t_engine *engine, t_world *world);
+static void		normalize_rawmap(t_world *world);
 static t_bool	flood_and_fill(t_world *world, char **map, int x, int y);
 
-t_bool	analize_map(t_engine *engine, t_world *world)
+t_bool	analize_map(t_world *world)
 {
 	t_bool	is_valid;
 
-	normalize_rawmap(engine, world);
+	normalize_rawmap(world);
 	is_valid = flood_and_fill(world, world->grid, 0, 0);
 	return (is_valid);
-}
-
-static int	find_normal_rawmap(t_world *world)
-{
-	int	x;
-	int	aux;
-	int	max;
-
-	x = 0;
-	max = 0;
-	while (x < world->h)
-	{
-		aux = ft_strlen(world->grid[x]);
-		if (aux > max)
-			max = aux;
-		x++;
-	}
-	return (max);
 }
 
 static char	*normalize_line_rawmap(char *line, int n)
@@ -69,24 +50,22 @@ static char	*normalize_line_rawmap(char *line, int n)
 	return (new);
 }
 
-static void		normalize_rawmap(t_engine *engine, t_world *world)
+static void		normalize_rawmap(t_world *world)
 {
 	int		x;
 	int		size;
-	int		normal;
 	char	*aux;
 
 	x = 0;
-	normal = find_normal_rawmap(world);
-	while (x < (world->h))
+	while (x < world->h)
 	{
 		size = ft_strlen(world->grid[x]);
-		if (size < normal)
+		if (size < world->w)
 		{
-			aux = normalize_line_rawmap(world->grid[x], normal);
+			aux = normalize_line_rawmap(world->grid[x], world->w);
 			if (!aux)
 			{
-				cleanup(engine, world);
+				destroy_cmtx_rev(world->grid, world->h);
 				perr_exit("Normalization of the Raw Map failed", EXIT_FAILURE);
 			}
 			free(world->grid[x]);
@@ -101,12 +80,12 @@ static t_bool	flood_and_fill(t_world *world, char **map, int x, int y)
 	if (x < 0 || y < 0 || x >= world->w || y >= world->h)
 		return (FALSE);
 
-	if (map[y][x] == '1' || map[y][x] == 'V')
+	if (map[x][y] == '1' || map[x][y] == 'V')
 		return (TRUE);
 
-	if (map[y][x] == ' ')
+	if (map[x][y] == ' ')
 		return (FALSE);
-	map[y][x] = 'V';
+	map[x][y] = 'V';
 	flood_and_fill(world, map, x + 1, y);
 	flood_and_fill(world, map, x - 1, y);
 	flood_and_fill(world, map, x, y + 1);

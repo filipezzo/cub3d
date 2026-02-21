@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 10:59:17 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/20 18:18:42 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/20 21:49:42 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,7 @@
 
 typedef struct s_world		t_world;
 typedef struct s_data		t_data;
-typedef struct s_textures	t_textures;
 typedef struct s_engine		t_engine;
-
-typedef struct s_textures
-{
-	t_data		*n;
-	t_data		*s;
-	t_data		*w;
-	t_data		*e;
-}				t_textures;
 
 typedef struct s_world
 {
@@ -78,7 +69,6 @@ typedef struct s_world
 	uint32_t	ceil_rgb;
 	uint32_t	wall_rgb;
 	char		*tex_path[TEX_COUNT];
-	t_textures	texs;
 	int			__side_tmp;
 	int			__tex_tmp;
 }				t_world;
@@ -218,8 +208,8 @@ void			draw_rect(t_data *img, t_rect r);
 void			draw_line(t_data *img, t_line l);
 int				clamp_int(int v, int lo, int hi);
 
-void			parse(char *fpath, t_engine *engine, t_world *world);
-t_bool			analize_map(t_engine *engine, t_world *world);
+void			parse(char *fpath, t_world *world);
+t_bool			analize_map(t_world *world);
 t_bnode			*get_start_map(t_dlist *lines);
 void			count_map_size(t_world *world, t_bnode *node);
 void			new_rawmap(t_world *world, t_bnode *node);

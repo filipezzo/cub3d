@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper_parse_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 10:04:58 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/20 01:35:15 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/20 21:48:29 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void	count_map_size(t_world *world, t_bnode *node)
 	while (node)
 	{
 		len = ft_strlen(node->data);
-		if (len > 0 && ((char *)node->data)[len - 1] == '\n')
-			len--;
 		if (len > width)
 			width = len;
 		height++;
@@ -65,7 +63,7 @@ void	new_rawmap(t_world *world, t_bnode *node)
 		return ;
 	}
 	i = 0;
-	while (i < world->h)
+	while (i < (world->h) && node)
 	{
 		world->grid[i] = ft_strdup(node->data);
 		if (!world->grid[i])
@@ -75,6 +73,7 @@ void	new_rawmap(t_world *world, t_bnode *node)
 			return ;
 		}
 		set_player_pos(world, i);
+		node = node->right;
 		i++;
 	}
 }
