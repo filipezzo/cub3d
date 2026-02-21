@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 14:20:47 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/20 21:42:03 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/20 22:53:21 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,23 @@
 
 static char		*normalize_line_rawmap(char *line, int n);
 static void		normalize_rawmap(t_world *world);
-static t_bool	flood_and_fill(t_world *world, char **map, int x, int y);
+static void		find_player(t_world *world, int *y, int *x);
+static t_bool	flood_and_fill(t_world *world, char **map, int y, int x);
 
 t_bool	analize_map(t_world *world)
 {
 	t_bool	is_valid;
+	char	**map;
+	int		x;
+	int		y;
 
+	x = 0;
+	y = 0;
 	normalize_rawmap(world);
-	is_valid = flood_and_fill(world, world->grid, 0, 0);
+	find_player(world, &y, &x);
+	map = dupmap(world);
+	is_valid = flood_and_fill(world, map, y, x);
+	destroy_cmtx_rev(map, world->h);
 	return (is_valid);
 }
 
@@ -75,20 +84,39 @@ static void		normalize_rawmap(t_world *world)
 	}
 }
 
-static t_bool	flood_and_fill(t_world *world, char **map, int x, int y)
+static void	find_player(t_world *world, int *y, int *x)
+{
+	if (!world->grid)
+		return ;
+	while (*y < world->h)
+	{
+		*x = 0;
+		while (*x < world->w)
+		{
+			if (world->grid[*y][*x] == 'P')
+				return ;
+			(*x)++;
+		}
+		(*y)++;
+	}
+}
+
+static t_bool	flood_and_fill(t_world *world, char **map, int y, int x)
 {
 	if (x < 0 || y < 0 || x >= world->w || y >= world->h)
 		return (FALSE);
-
-	if (map[x][y] == '1' || map[x][y] == 'V')
-		return (TRUE);
-
-	if (map[x][y] == ' ')
+	if (map[y][x] == ' ')
 		return (FALSE);
-	map[x][y] = 'V';
-	flood_and_fill(world, map, x + 1, y);
-	flood_and_fill(world, map, x - 1, y);
-	flood_and_fill(world, map, x, y + 1);
-	flood_and_fill(world, map, x, y - 1);
+	if (map[y][x] == '1' || map[y][x] == 'V')
+		return (TRUE);
+	map[y][x] = 'V';
+	if (!flood_and_fill(world, map, y, x + 1))
+		return (FALSE);
+	if (!flood_and_fill(world, map, y, x - 1))
+		return (FALSE);
+	if (!flood_and_fill(world, map, y + 1, x))
+		return (FALSE);
+	if (!flood_and_fill(world, map, y - 1, x))
+		return (FALSE);
 	return (TRUE);
 }

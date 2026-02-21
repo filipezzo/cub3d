@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 10:59:17 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/20 21:49:42 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/20 22:42:18 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ t_bool			analize_map(t_world *world);
 t_bnode			*get_start_map(t_dlist *lines);
 void			count_map_size(t_world *world, t_bnode *node);
 void			new_rawmap(t_world *world, t_bnode *node);
+char			**dupmap(t_world *world);
 void			set_player_pos(t_world *world, int x);
 void			set_player_dir(t_world *world, char tgt);
 t_bool			load_color(uint32_t *color, const char *str);

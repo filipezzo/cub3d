@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy_cmtx_rev.c                                 :+:      :+:    :+:   */
+/*   dupmap.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/18 17:17:56 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/20 22:55:17 by mhidani          ###   ########.fr       */
+/*   Created: 2026/02/20 22:38:35 by mhidani           #+#    #+#             */
+/*   Updated: 2026/02/20 22:41:52 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	destroy_cmtx_rev(char **cmtx, int i)
+char	**dupmap(t_world *world)
 {
-	if (!cmtx || i < 0)
-		return ;
-	while (i > 0)
+	char	**new;
+	int		i;
+
+	if (!world || !world->grid)
+		return (NULL);
+	new = ft_calloc(world->h, sizeof(char *));
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (i < world->h)
 	{
-		if (cmtx[i - 1])
-			free(cmtx[i - 1]);
-		i--;
+		new[i] = ft_strdup(world->grid[i]);
+		i++;
 	}
-	free(cmtx);
+	return (new);
 }

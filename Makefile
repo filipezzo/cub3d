@@ -6,7 +6,7 @@
 #    By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 10:52:32 by fsousa            #+#    #+#              #
-#    Updated: 2026/02/20 20:11:58 by mhidani          ###   ########.fr        #
+#    Updated: 2026/02/20 22:42:42 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ PLAYER_FILES	= player_update.c player_update_utils.c
 RAYCAST_FILES	= raycast.c ray_dda.c ray_draw.c ray_init.c ray_project.c
 TEXTURES_FILES	= textures.c textures_utils.c
 PARSER_FILES	= analize_map.c helper_parse_map.c load_color.c load_texture.c \
-				  parse.c set_vec2.c validate_fpath.c
+				  parse.c dupmap.c set_vec2.c validate_fpath.c
 CLEAN_FILES		= game_shutdown.c
 UTIL_FILES		= destroy_cmtx_rev.c perr.c pinfo.c safe_close_fd.c
 
