@@ -1,7 +1,7 @@
-NO assets/textures/brick_wall.xpm
-SO assets/textures/brick_wall.xpm
-WE assets/textures/brick_wall.xpm
-EA assets/textures/brick_wall.xpm
+NO ./assets/textures/brick_wall_north.xpm
+SO ./assets/textures/brick_wall_south.xpm
+WE ./assets/textures/brick_wall_cracked_west.xpm
+EA ./assets/textures/brick_wall_cracked_east.xpm
 
 F 42,42,42
 C 100,100,200
