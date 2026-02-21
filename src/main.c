@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 11:00:55 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/20 20:15:37 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/21 11:27:31 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,12 @@ int	main(int argc, char **argv)
 		return (EXIT_SUCCESS);
 	}
 	ft_bzero(&game, sizeof(game));
-	//world_fake(&game.world);
 	parse(argv[1], &game.world);
 	if (!engine_init(&game.eng, GAME_WIDTH, GAME_HEIGHT, "cub3d"))
 		return (EXIT_FAILURE);
 	if (!textures_load(&game))
 	{
-		ft_putstr_fd("Error: textures_load failed", 2);
+		perr("textures_load failed");
 		engine_shutdown(&game.eng);
 		return (EXIT_FAILURE);
 	}
