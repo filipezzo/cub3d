@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   analize_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 14:20:47 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/20 22:53:21 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/21 10:58:35 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static char		*normalize_line_rawmap(char *line, int n);
+static char		*normalize_line_rawmap(char *line, size_t n);
 static void		normalize_rawmap(t_world *world);
 static void		find_player(t_world *world, int *y, int *x);
 static t_bool	flood_and_fill(t_world *world, char **map, int y, int x);
@@ -34,13 +34,17 @@ t_bool	analize_map(t_world *world)
 	return (is_valid);
 }
 
-static char	*normalize_line_rawmap(char *line, int n)
+static char	*normalize_line_rawmap(char *line, size_t n)
 {
-	int		i;
 	char	*new;
+	size_t	i;
+	size_t	len;
 
-	if (!line || n == 0 || (line && ft_strlen(line) >= (size_t)n))
+	if (!line || n == 0)
 		return (NULL);
+	len = ft_strlen(line);
+	if (len >= n)
+		return (ft_strdup(line));
 	new = ft_calloc(n + 1, sizeof(char));
 	if (!new)
 	{
@@ -50,7 +54,7 @@ static char	*normalize_line_rawmap(char *line, int n)
 	i = 0;
 	while (i < n)
 	{
-		if (line[i])
+		if (i < len)
 			new[i] = line[i];
 		else
 			new[i] = 32;
@@ -71,7 +75,7 @@ static void		normalize_rawmap(t_world *world)
 		size = ft_strlen(world->grid[x]);
 		if (size < world->w)
 		{
-			aux = normalize_line_rawmap(world->grid[x], world->w);
+			aux = normalize_line_rawmap(world->grid[x], (size_t)world->w);
 			if (!aux)
 			{
 				destroy_cmtx_rev(world->grid, world->h);
