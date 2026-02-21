@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 15:45:02 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/20 20:09:25 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/21 00:53:00 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ t_bool	load_texture(t_world *world, int tgt, char *path)
 	if (fd == -1)
 		exit(EXIT_FAILURE);
 	safe_close_fd(fd);
-	world->tex_path[tgt] = path;
+	world->tex_path[tgt] = ft_strdup(path);
 	return (TRUE);
 }
