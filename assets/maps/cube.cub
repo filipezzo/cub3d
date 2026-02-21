@@ -3,14 +3,14 @@ SO assets/textures/brick_wall.xpm
 WE assets/textures/brick_wall.xpm
 EA assets/textures/brick_wall.xpm
 
-F 220,100,0
-C 225,30,0
+F 42,42,42
+C 100,100,200
 
   111111
  1100001
 1100000111
 1000000001
-10N0000001
+10S0000001
 1100000011
  11000011
   111111
