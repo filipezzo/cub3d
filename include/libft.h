@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 20:37:22 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/05 11:27:34 by fsousa           ###   ########.fr       */
+/*   Updated: 2026/02/20 01:46:23 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ t_dlist		*ft_add_nd_dlist(t_dlist *list, void *data, t_destroy dst);
 t_dlist		*ft_remove_nd_dlist(t_dlist *list, t_bnode *tgt);
 t_bnode		*ft_findin_dlist(t_dlist *list, void *data, t_bool (*eq)());
 t_bnode		*ft_indexof_dlist(t_dlist *list, size_t idx);
+size_t		ft_getidx_dlist(t_dlist *list, t_bnode *node);
 t_dlist		*ft_dlst_dup(t_dlist *src, void *(dup)(), void (*destroy)());
 t_bool		ft_sort_dlist(t_dlist *list, t_sort dir, int (*cmp)());
 t_bool		ft_foreach_dlist(t_dlist *list, void *data, t_foreach_callback cbk);
