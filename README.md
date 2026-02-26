@@ -9,16 +9,48 @@ In this project, we build a lightweight rendering engine in C, handling window m
 
 Cub3D is also a team-based project, requiring collaboration, task distribution, and communication between partners, which makes it an excellent opportunity to practice teamwork and software engineering practices in a real-world-like environment.
 
+## Features
+- Ray Casting rendering engine
+- Reader and parser of maps in .cub format
+- Player movement
+- Mini-map showing the player's direction
+- Collision between player and walls
+- Window management
+  - Close button and escape key to close window
+  - Button minimize window
+
+_**Cub3D Map: alley.cub**_<br>
+<img width="598" height="372" alt="Screenshot from 2026-02-26 07-45-31" src="https://github.com/user-attachments/assets/e50a295e-2b51-46f6-897b-6feef922e360" />
+
+_**Cub3D Map: cube.cub**_<br>
+<img width="598" height="372" alt="Screenshot from 2026-02-26 07-45-50" src="https://github.com/user-attachments/assets/987f65d0-16a4-4f40-a8b5-66eefd0fd688" />
+
+_**Cub3D Map: forty_two_school.cub**_<br>
+<img width="598" height="372" alt="Screenshot from 2026-02-26 07-56-33" src="https://github.com/user-attachments/assets/e1c8855f-4006-4ee0-a7b7-19c822014d6f" />
+
 ## Instructions ⚙️
-TODO
+To run the game, you must always specify a map so that it can be loaded.
+
+If no map is specified, an error message will be displayed.
 
 To run the game, use this command in your `shell`:
 ```shell
 ./bin/cub3d ./assets/maps/nuke.cub
 ```
 
+### How to play
+Instructions for playing:
+- [**W**] _Move forward_
+- [**A**] _Move left_
+- [**S**] _Move backward_
+- [**D**] _Move right_
+- [**Left Arrow**] _Rotate view to the left_
+- [**Right Arrow**] _Rotate view to the right_
+
 ## Resources 🔍
-TODO
+- [Raycasting](https://lodev.org/cgtutor/raycasting.html)
+- [Raycasting Engine](https://www.youtube.com/watch?v=J5K8qMCB-7o&list=PLLFRf_pkM7b6rBRoTOW64NKdltCLQNpW5)
+- [Wall Textures](https://itch.io/)
 
 **Find us**:
 - Filipe Sousa: fsousa | [linkedin](https://www.linkedin.com/in/filipezzo/)
