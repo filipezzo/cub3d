@@ -4,7 +4,7 @@ SO ./assets/textures/wooden_floor_vertical.xpm
 WE ./assets/textures/wooden_floor_horizontal.xpm
 
 C 100,100,110
-F 22,22,22
+F 42,42,42
 
 11111  1111111111111
 10S01  1000000000011
