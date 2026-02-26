@@ -1,5 +1,5 @@
 # Cub3D 🕹️
-*This project was created as part of the [42](https://www.42sp.org.br/) curriculum by `mhidani` and `fsousa`.*
+*This project was created as part of the [42](https://www.42sp.org.br/) curriculum by `fsousa` and `mhidani`.*
 
 ## Description 📃
 
