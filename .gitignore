@@ -1,4 +1,11 @@
+# Directories
 /bin
 /obj
 /.vscode/*
 /.vscode
+/.brainStorage
+
+# Files
+*.o
+*.a
+*.pdf

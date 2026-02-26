@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsousa <fsousa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 10:59:17 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/20 16:10:49 by fsousa           ###   ########.fr       */
+/*   Updated: 2026/02/21 10:17:03 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdint.h>
+# include <fcntl.h>
+# include <unistd.h>
 
 # define KEY_ESC 65307
 # define KEY_ARROW_LEFT 65361
@@ -40,6 +43,17 @@
 # define ROT_SPEED 0.0050
 # define COL_PAD 0.15
 
+# define NORTH_TGT "NO "
+# define SOUTH_TGT "SO "
+# define WEST_TGT "WE "
+# define EAST_TGT "EA "
+# define CEIL_TGT "C "
+# define FLOOR_TGT "F "
+
+typedef struct s_world		t_world;
+typedef struct s_data		t_data;
+typedef struct s_engine		t_engine;
+
 typedef struct s_world
 {
 	char		**grid;
@@ -51,6 +65,7 @@ typedef struct s_world
 	double		dir_y;
 	double		plane_x;
 	double		plane_y;
+	double		fov;
 	uint32_t	floor_rgb;
 	uint32_t	ceil_rgb;
 	uint32_t	wall_rgb;
@@ -189,7 +204,29 @@ void			ray_draw_column(t_game *g, t_ray *r);
 void			game_shutdown(t_game *g);
 void			build_move_vec(double v[2], t_world *w, t_input *in);
 void			render_minimap(t_game *game);
+
 void			draw_rect(t_data *img, t_rect r);
 void			draw_line(t_data *img, t_line l);
 int				clamp_int(int v, int lo, int hi);
+
+void			parse(char *fpath, t_world *world);
+t_bool			analize_map(t_world *world);
+t_bnode			*get_start_map(t_dlist *lines);
+void			count_map_size(t_world *world, t_bnode *node);
+void			new_rawmap(t_world *world, t_bnode *node);
+char			**dupmap(t_world *world);
+void			set_player_pos(t_world *world, int x);
+void			set_player_dir(t_world *world, char tgt);
+t_bool			load_color(uint32_t *color, const char *str);
+t_bool			load_texture(t_world *world, int tgt, char *path);
+int				validate_fpath(char *fpath, char *ext);
+void			set_vec2(double x, double y, double *tx, double *ty);
+
+void			safe_close_fd(int fd);
+void			destroy_cmtx_rev(char **cmtx, int i);
+void			pinfo(const char *msg);
+void			perr(const char *msg);
+void			perr_exit(const char *msg, int status_code);
+t_bool			perr_failed(const char *msg);
+
 #endif
