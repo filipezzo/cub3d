@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper_parse_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 10:04:58 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/21 10:20:58 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/26 13:45:42 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	count_map_size(t_world *world, t_bnode *node)
 
 void	new_rawmap(t_world *world, t_bnode *node)
 {
-	int	i;
+	int	y;
 
 	world->grid = ft_calloc(world->h, sizeof(char *));
 	if (!world->grid)
@@ -62,41 +62,41 @@ void	new_rawmap(t_world *world, t_bnode *node)
 		perr("grid memory allocation failed");
 		return ;
 	}
-	i = 0;
-	while (i < (world->h) && node)
+	y = 0;
+	while (y < (world->h) && node)
 	{
-		world->grid[i] = ft_strdup(node->data);
-		if (!world->grid[i])
+		world->grid[y] = ft_strdup(node->data);
+		if (!world->grid[y])
 		{
 			perr("get grid row failed");
-			destroy_cmtx_rev(world->grid, i);
+			destroy_cmtx_rev(world->grid, y);
 			return ;
 		}
 		world->fov = 0.66;
-		set_player_pos(world, i);
+		set_player_pos(world, y);
 		node = node->right;
-		i++;
+		y++;
 	}
 }
 
-void	set_player_pos(t_world *world, int x)
+void	set_player_pos(t_world *world, int y)
 {
-	int		y;
+	int		x;
 	char	tgt;
 
-	y = 0;
-	while (world->grid[x][y])
+	x = 0;
+	while (world->grid[y][x])
 	{
-		tgt = world->grid[x][y];
+		tgt = world->grid[y][x];
 		if (tgt && (tgt == 'N' || tgt == 'S' || tgt == 'E' || tgt == 'W'))
 		{
 			world->px = x + 0.5;
 			world->py = y + 0.5;
 			set_player_dir(world, tgt);
-			world->grid[x][y] = 'P';
+			world->grid[y][x] = 'P';
 			break ;
 		}
-		y++;
+		x++;
 	}
 }
 

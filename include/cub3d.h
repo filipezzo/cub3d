@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 10:59:17 by fsousa            #+#    #+#             */
-/*   Updated: 2026/02/21 10:17:03 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/26 13:46:02 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,7 @@ t_bnode			*get_start_map(t_dlist *lines);
 void			count_map_size(t_world *world, t_bnode *node);
 void			new_rawmap(t_world *world, t_bnode *node);
 char			**dupmap(t_world *world);
-void			set_player_pos(t_world *world, int x);
+void			set_player_pos(t_world *world, int y);
 void			set_player_dir(t_world *world, char tgt);
 t_bool			load_color(uint32_t *color, const char *str);
 t_bool			load_texture(t_world *world, int tgt, char *path);
