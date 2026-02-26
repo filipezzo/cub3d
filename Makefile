@@ -93,7 +93,7 @@ clean:
 fclean: clean
 	@$(RM) $(LIBFT)
 	@$(RM) $(MLX_A)
-	@$(RM) $(SLIB_DIR)
+	@$(RM) $(NAME)
 	@echo "[\033[0;31mOK\033[0m] Complete cleaning."
 
 re: fclean all
