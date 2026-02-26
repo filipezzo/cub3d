@@ -6,7 +6,7 @@
 #    By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 10:52:32 by fsousa            #+#    #+#              #
-#    Updated: 2026/02/20 22:42:42 by mhidani          ###   ########.fr        #
+#    Updated: 2026/02/26 13:25:09 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ NAME			= cub3d
 
 SRC_DIR			= src
 OBJ_DIR			= obj
-BIN_DIR			= bin
 LIBS_DIR		= libs
 INCLUDE_DIR		= include
 ENGINE_DIR		= $(SRC_DIR)/engine
@@ -29,7 +28,7 @@ LIBFT_DIR		= $(LIBS_DIR)/libft
 MLX_DIR			= $(LIBS_DIR)/mlx
 CLEAN_DIR		= $(SRC_DIR)/clean
 
-EXEC			= $(BIN_DIR)/$(NAME)
+EXEC			= $(NAME)
 
 LIBFT			= $(LIBFT_DIR)/libft.a
 MLX_A			= $(MLX_DIR)/libmlx.a
@@ -73,7 +72,6 @@ RM				= rm -rf
 all: $(EXEC)
 
 $(EXEC): $(LIBFT) $(MLX_A) $(OBJS)
-	@mkdir -p $(BIN_DIR)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT)  -o $(EXEC) $(LDFLAGS) $(LDLIBS)
 	@echo "[\033[0;32mOK\033[0m] $(NAME) compiled in $(BIN_DIR) 👌👌😍"
 
@@ -93,7 +91,6 @@ clean:
 	@echo "[\033[0;31mOK\033[0m] Cleaned object files."
 
 fclean: clean
-	@$(RM) $(BIN_DIR)
 	@$(RM) $(LIBFT)
 	@$(RM) $(MLX_A)
 	@$(RM) $(SLIB_DIR)
