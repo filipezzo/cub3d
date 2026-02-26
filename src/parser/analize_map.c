@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 14:20:47 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/21 10:58:35 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/26 07:42:56 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static char	*normalize_line_rawmap(char *line, size_t n)
 	return (new);
 }
 
-static void		normalize_rawmap(t_world *world)
+static void	normalize_rawmap(t_world *world)
 {
 	int		x;
 	int		size;
